@@ -1,20 +1,19 @@
 
-import math
-
-
-def next_power_of_10(x):
-    return 1 if x == 0 else 10**math.ceil(math.log10(x))
-
-
 def convert_to_roman_numerals(num):
 
     numerals_dict = {
         1000: 'M',
+        900: 'CM',
         500: 'D',
+        400: 'CD',
         100: 'C',
+        90: 'XC',
         50: 'L',
+        40: 'XL',
         10: 'X',
+        9: 'IX',
         5: 'V',
+        4: 'IV',
         1: 'I'
     }
 
@@ -24,22 +23,7 @@ def convert_to_roman_numerals(num):
 
         for key, value in sorted(numerals_dict.items(), reverse=True):
 
-            upper_value = next_power_of_10(num)
-
             while num / key >= 1:
-
-                if not num >= 1000:
-
-                    if ((num + (upper_value / 10)) % (upper_value / 2)) < (upper_value / 10):
-
-                        if (num % upper_value) > (upper_value / 2):
-                            result += numerals_dict[upper_value / 10] + numerals_dict[upper_value]
-                            num -= upper_value - (upper_value / 10)
-                        else:
-                            result += numerals_dict[upper_value / 10] + numerals_dict[upper_value / 2]
-                            num -= (upper_value / 2) - (upper_value / 10)
-
-                        continue
 
                 result += value
                 num -= key
